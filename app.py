@@ -1,6 +1,6 @@
 from flask import Flask
 from flask import request
-
+import numpy as np
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
@@ -19,6 +19,10 @@ def get_prediction():
     h3 = request.args.get('h3')
     h4 = request.args.get('h4')
 
-    test = np.array([age,gender,h1,h2,h3,h4])
-    result = model.evaluate(test, batch_size=1)
+    # test = np.array([age,gender,h1,h2,h3,h4])
+    test = np.array([66,1,66,66,66,66])
+    result = model.predict_classes(test, batch_size=1)
     return result
+
+if __name__ == '__main__':
+    app.run()
