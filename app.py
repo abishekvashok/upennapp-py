@@ -20,7 +20,7 @@ def get_prediction():
     h4 = request.args.get('h4')
 
     # test = np.array([age,gender,h1,h2,h3,h4])
-    test = np.array([[66,1,66,66,66,66]])
+    test = np.array([[int(age),int(gender),int(h1),int(h2),int(h3),int(h4)]])
     result = model.predict_classes(test, batch_size=1)[0]
     return str(result)
 
