@@ -1,10 +1,17 @@
 from flask import Flask
 from flask import request
 
-app = Flask(__name__)
+import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras import layers
 
-@app.route('/')
+
+app = Flask(__name__)
+model = keras.models.load_model('./model.h5')
+
+@app.route('/predict')
 def get_prediction():
+    # TODO: Consider using post method instead of get
     age = request.args.get('age')
     gender = request.args.get('gender')
     h1 = request.args.get('h1')
@@ -12,7 +19,6 @@ def get_prediction():
     h3 = request.args.get('h3')
     h4 = request.args.get('h4')
 
-	test = np.array([age,gender,h1,h2,h3,h4])
-	result = model.evaluate(test, batch_size=1)
-
-	return result
+    test = np.array([age,gender,h1,h2,h3,h4])
+    result = model.evaluate(test, batch_size=1)
+    return result
