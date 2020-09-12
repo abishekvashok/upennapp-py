@@ -20,9 +20,9 @@ def get_prediction():
     h4 = request.args.get('h4')
 
     # test = np.array([age,gender,h1,h2,h3,h4])
-    test = np.array([66,1,66,66,66,66])
-    result = model.predict_classes(test, batch_size=1)
-    return result
+    test = np.array([[66,1,66,66,66,66]])
+    result = model.predict_classes(test, batch_size=1)[0]
+    return str(result)
 
 if __name__ == '__main__':
     app.run()
